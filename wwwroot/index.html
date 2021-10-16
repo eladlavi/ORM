@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ORM</title>
+    <script src="script.js"></script>
+    <script src="users.js"></script>
+    <script src="tables.js"></script>
+    <script src="data.js"></script>
+    
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body onload="init()">
+    <div id="divLogin">
+        <h3>login or signup</h3>
+        <p>
+            <label>username:</label>
+            <input type="text" id="txtUsername" onkeypress="divLoginKeyPress(event)" />
+        </p>
+        <p>
+            <label>password:</label>
+            <input type="password" id="txtPassword" onkeypress="divLoginKeyPress(event)"/>
+        </p>
+        <p>
+            <label>organization:</label>
+            <input type="text" id="txtOrganization" onkeypress="divLoginKeyPress(event)" />
+        </p>
+        <p>
+            <button id="btnLogin" onclick="btnLoginClicked()">login</button>
+            <button id="btnSignup" onclick="btnSignupClicked()">signup</button>
+        </p>
+        <p id="lblLoginMessage"></p>
+    </div>
+    <div id="divMain" class="hidden">
+        <h3>welcome to Information System Wizard</h3>
+        <div><button onclick="btnShowUsers()">users</button><button onclick="btnShowDesign()">design DB</button><button onclick="btnShowData()">data entry</button></div>
+        <div id="divUsers">
+            <h3>users management</h3>
+            <p>
+                <label>users:</label>
+                <select id="ddUsers" style="width: 200px;" onchange="ddUsersChanged()"></select><label>role:</label><span id="lblRole"></span> <button id="btnReloadUsers" onclick="loadUsers()">reload</button>
+                <button id="btnDeleteUser" onclick="btnDeleteUserClicked()">delete user</button>
+                <button id="btnResetPassword" onclick="btnResetPasswordClicked()">reset password</button>
+            <p><label>change role:</label><input type="number" id="txtRole" /><button id="btnChangeRole" onclick="btnChangeRoleClicked()">set role</button></p>
+            </p>
+            <p>
+                <label>new user:</label>
+                <input type="text" id="txtNewUsername" />
+                <button id="btnAddUser" onclick="btnAddUserClicked()">add user</button>
+            <p>(users are added with default password of 12345 and they can change it anytime)</p>
+            </p>
+            <p>
+                <label>change my password to:</label>
+                <input type="password" id="txtNewPassword" />
+                <button id="btnSetMyPassword" onclick="btnSetMyPasswordClicked()">set my password</button>
+            </p>
+            <p id="lblUsersMessage"></p>
+        </div>
+        <div class="hidden" id="divDesign">
+            <h3>design DB</h3>
+            <p><label>tables:</label><select id="ddTables" style="width:200px;" onchange="ddTablesChanged()"></select><button id="btnReloadTables" onclick="btnReloadTablesClicked(null)">reload</button><label>delete table:</label><button id="btnDropTable" onclick="btnDropTableClicked()">DROP this table</button></p>
+            <p><label>create new table:</label><input type="text" id="txtNewTableName" /><button id="btnCreateTable" onclick="btnCreateTableClicked()">create table</button></p>
+            <p>
+                <label>add column:</label>name:<input type="text" id="txtNewColumnName" />
+                . data type:
+                <select id="ddDataType">
+                    <option value="varchar">text</option>
+                    <option value="int">integer</option>
+                    <option value="real">real</option>
+                    <option value="bit">yes/no</option>
+                </select>
+                . is nullable? <input type="checkbox" id="chkIsNullable" />
+                . default value:<input type="text" id="txtDefaultValue" />
+                <button id="btnAddNewColumn" onclick="addNewColumnClicked()">add new column</button>
+            </p>
+            <p>
+                <label>columns of selected table:</label>
+                <select id="ddColumns" onchange="ddColumnsChanged()" style="width:200px;"></select> <button id="btnDropColumn" onclick="btnDropColumnClicked()">drop this column</button>
+            </p>
+            <p>datatype: <span id="lblDataType"></span>. ordinal position: <span id="lblOrdinalPosition"></span>. is nullable? <span id="lblIsNullable"></span>. character length <span id="lblCharacterLength"></span>. foreign key: <span id="lblForeignKey"></span><button id="btnDropForeginKey" onclick="btnDropForeginKeyClicked()">DROP this foregin key</button></p>
+            <p>
+                add foreign key:
+                <select id="ddForeginKeyTables"></select><button id="btnAddForeignKey" onclick="btnAddForeignKeyClicked()">add foregin key</button>
+            <p>(first select a column. the foregin key is always to the 'id' column.</p>
+            </p>
+            <p id="lblDesignDatabaseMessage"></p>
+        </div>
+        <div class="hidden" id="divData">
+            <h3>edit and view data</h3>
+            <p>table: <select id="ddTables2"  onchange="ddTables2Changed()"></select><button id="btnReloadData" onclick="loadAllData()">reload</button></p>
+            <div id="divTable"></div>
+            <div>
+                <p>add new data:</p>
+                <div id="divEditData"></div>
+                <button id="btnSave" onclick="btnSaveClicked()">save</button>
+            </div>
+            <p id="lblDataMessage"></p>
+        </div>
+</body>
+</html>

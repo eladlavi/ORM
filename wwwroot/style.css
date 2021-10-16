@@ -1,0 +1,21 @@
+﻿.hidden{
+    display: none;
+}
+
+tr:nth-child(even) {
+    background-color: #D6EEEE;
+}
+
+tr:hover {
+    background-color: #D6EEEE;
+}
+
+th{
+    background-color:darkslateblue;
+    color: white;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
